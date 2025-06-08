@@ -1,5 +1,5 @@
-import CrudRepository from './crud-repository.js'
 import User from '../models/user-model.js'
+import CrudRepository from './crud-repository.js'
 
 class UserRepository extends CrudRepository {
 
@@ -13,7 +13,7 @@ class UserRepository extends CrudRepository {
     }
 
     async getByUsername(username) {
-        const user = await User.findOne({username});
+        const user = await User.findOne({username}).select("-password");
         return user;
     }
 

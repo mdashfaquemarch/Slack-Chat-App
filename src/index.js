@@ -10,11 +10,13 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 // importing routes
+import globalErrorHandler from './middlewares/error-middleware.js';
 import apiRoutes from './routes/index.js';
 
 app.use("/api", apiRoutes);
 
-
+// Global error middleware (at the end)
+app.use(globalErrorHandler);
 
 app.listen(Config.PORT, () => {
   console.log(
