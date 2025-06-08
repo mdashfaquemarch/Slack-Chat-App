@@ -10,17 +10,17 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 // importing routes
-import globalErrorHandler from './middlewares/error-middleware.js';
+import {errorHandler} from './middlewares/error-middleware.js';
 import apiRoutes from './routes/index.js';
 
 app.use("/api", apiRoutes);
 
 // Global error middleware (at the end)
-app.use(globalErrorHandler);
+app.use(errorHandler);
 
 app.listen(Config.PORT, () => {
   console.log(
     `server is running at PORT: ${Config.PORT} Env: ${Config.NODE_ENV}`
   );
-  connectDB()
+  connectDB();
 });

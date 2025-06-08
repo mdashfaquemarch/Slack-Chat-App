@@ -1,6 +1,6 @@
-import { signUpService } from "../services/user-service.js";
-
 import {StatusCodes} from 'http-status-codes'
+
+import { signUpService } from "../services/user-service.js";
 
 
 
