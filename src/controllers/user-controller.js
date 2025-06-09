@@ -1,6 +1,6 @@
 import {StatusCodes} from 'http-status-codes'
 
-import { signUpService } from "../services/user-service.js";
+import { signInService, signUpService } from "../services/user-service.js";
 
 
 
@@ -17,7 +17,22 @@ async function signUpController(req, res, next) {
     }
 }
 
+async function signInController(req, res, next) {
+    try {
+       
+        const response = await signInService(req.body);
+       
+        return res.status(StatusCodes.OK).json({
+            success: true,
+            data: response,
+            message: "User signin successfully"
+        })
+    } catch (error) {
+        next(error);
+    }
+}
+
 
 export {
-    signUpController
-}
+    signInController,
+    signUpController}

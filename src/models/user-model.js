@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+import bcrypt from 'bcrypt';
 
 const userSchema = new mongoose.Schema({
    email: {
@@ -30,11 +30,13 @@ const userSchema = new mongoose.Schema({
    }
 }, {timestamps: true})
 
-userSchema.pre("save", function saveUser(next) {
-  const user = this;
-
-  user.avatar = `https://robohash.org/${user.username}`
-  next();
+userSchema.pre("save",  function saveUser(next) {
+    const user = this;
+    user.avatar = `https://robohash.org/${user.username}`
+    if(!this.isModified("password")) return next();
+    const hashedPassword = bcrypt.hashSync(user.password, 9)
+    user.password = hashedPassword;
+    next();
 })
 
 const User = mongoose.model("User", userSchema);

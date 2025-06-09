@@ -1,7 +1,7 @@
 // utils/errors/error-handler.js
 import AppError from "../utils/errors/app-error.js";
 
-export const errorHandler = (err, req, res, next) => {
+export const errorHandler = (err, _, res, ) => {
   let error = { ...err };
 
   // Ensure message is copied properly

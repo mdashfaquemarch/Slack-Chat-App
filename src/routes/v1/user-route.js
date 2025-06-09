@@ -1,13 +1,14 @@
 import express from 'express'
 
-import {signUpController} from '../../controllers/user-controller.js'
-import { userSignupSchema } from '../../validators/userSchema.js';
+import {signInController,signUpController} from '../../controllers/user-controller.js'
+import { userSignInSchema,userSignUpSchema } from '../../validators/userSchema.js';
 import {validate} from '../../validators/zodValidator.js'
 
 const router = express.Router();
 
 
-router.post("/signup",validate(userSignupSchema), signUpController);
+router.post("/signup", validate(userSignUpSchema), signUpController);
 
+router.post("/signin", validate(userSignInSchema), signInController);
 
 export default router;
