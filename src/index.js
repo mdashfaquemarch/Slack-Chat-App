@@ -7,13 +7,13 @@ const app = express();
 // common middlewares
 
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
 // importing routes
-import {errorHandler} from './middlewares/error-middleware.js';
+import { errorHandler } from './middlewares/error-middleware.js';
 import apiRoutes from './routes/index.js';
 
-app.use("/api", apiRoutes);
+app.use('/api', apiRoutes);
 
 // Global error middleware (at the end)
 app.use(errorHandler);
