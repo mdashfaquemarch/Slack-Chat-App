@@ -27,6 +27,15 @@ class CrudRepository {
     const updatedDoc = await this.model.findByIdAndUpdate(id, data);
     return updatedDoc;
   }
+
+  async deleteMany(modelIds) {
+    const response = await this.model.deleteMany({
+      _id: {
+        $in: modelIds
+      }
+    })
+    return response;
+  }
 }
 
 export default CrudRepository;

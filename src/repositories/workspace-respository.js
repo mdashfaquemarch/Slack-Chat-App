@@ -23,6 +23,7 @@ class WorkspaceRepository extends CrudRepository {
 
     return workspace;
   }
+  
   async getWorkspaceByJoinCode(joinCode) {
     const workspace = await Workspace.findOne({
       joinCode: joinCode
@@ -91,7 +92,7 @@ class WorkspaceRepository extends CrudRepository {
       );
     }
 
-    const channel = await channelRepo.create({ name: channelName });
+    const channel = await channelRepo.create({ name: channelName , workspaceId: workspaceId});
 
     workspace.channels.push(channel);
 
@@ -105,6 +106,14 @@ class WorkspaceRepository extends CrudRepository {
     }).populate("members.memberId", "username email avatar")
 
     return workspaces;
+  }
+
+  async getWorkspaceDetailsById(workspaceId) {
+    const workspace = await Workspace.findById(workspaceId)
+    .populate("members.memberId", "username email avatar")
+    .populate("channels")
+
+    return workspace;
   }
 }
 
