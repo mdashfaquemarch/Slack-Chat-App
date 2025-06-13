@@ -113,8 +113,8 @@ async function getWorkspaceByJoinCodeService(joinCode, userId) {
 
         const isMember = isUserMemberOfWorkspace(workspace, userId);
 
-        if (isMember) {
-            throw new AppError("user is already a member of workspace", StatusCodes.BAD_REQUEST);
+        if (!isMember) {
+            throw new AppError("User is not a member of the workspace", StatusCodes.UNAUTHORIZED);
         }
 
         return workspace;
@@ -137,7 +137,7 @@ async function updateWorkspaceService(workspaceId, workspaceData, userId) {
             throw new AppError("User is not an admin of workspace", StatusCodes.UNAUTHORIZED);
         }
 
-        const updatedWorkspace = workspaceRepo.update(workspaceId, workspaceData);
+        const updatedWorkspace = await workspaceRepo.update(workspaceId, workspaceData);
 
         return updatedWorkspace;
 
@@ -146,7 +146,7 @@ async function updateWorkspaceService(workspaceId, workspaceData, userId) {
     }
 }
 
-async function addMemberToWorkspaceService(workspaceId, memberId, role,userId) {
+async function addMemberToWorkspaceService(workspaceId, memberId, role, userId) {
     try {
         const workspace = await workspaceRepo.getById(workspaceId);
 
@@ -166,7 +166,7 @@ async function addMemberToWorkspaceService(workspaceId, memberId, role,userId) {
             throw new AppError("User is not an admin of workspace", StatusCodes.UNAUTHORIZED);
         }
 
-        const isMember = isUserMemberOfWorkspace(workspace, userId);
+        const isMember = isUserMemberOfWorkspace(workspace, memberId);
         if (isMember) {
             throw new AppError("User is already a member of workspace", StatusCodes.BAD_REQUEST);
         }

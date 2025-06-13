@@ -13,7 +13,7 @@ router.delete("/:workspaceId", isAuthenticated, deleteWorkspaceController);
 router.get("/:workspaceId", isAuthenticated, getWorkspaceController);
 router.get("/join/:joinCode", isAuthenticated, getWorkspaceByJoinCodeController);
 router.put("/:workspaceId", isAuthenticated, updateWorkspaceController);
-router.put("/:workspaceId/member", isAuthenticated , validate(addMemberToWorkspaceSchema), addMemberToWorkspaceController);
-router.put("/:workspaceId/channel", isAuthenticated, validate(addChannelToWorkspaceSchema), addChannelToWorkspaceController);
+router.put("/:workspaceId/members", isAuthenticated , validate(addMemberToWorkspaceSchema), addMemberToWorkspaceController);
+router.put("/:workspaceId/channels", isAuthenticated, validate(addChannelToWorkspaceSchema), addChannelToWorkspaceController);
 
 export default router;

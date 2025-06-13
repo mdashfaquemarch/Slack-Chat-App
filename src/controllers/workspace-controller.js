@@ -105,6 +105,7 @@ async function updateWorkspaceController(req, res, next) {
         next(error)
     }
 }
+
 async function addMemberToWorkspaceController(req, res, next) {
        try {
         const response = await addMemberToWorkspaceService(
