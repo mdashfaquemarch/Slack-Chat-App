@@ -10,7 +10,9 @@ const _config = {
   MONGODB_URL_DEV: process.env.MONGODB_URL_DEV,
   MONGODB_URL_PROD: process.env.MONGODB_URL_PROD,
   JWT_SECRET: process.env.JWT_SECRET,
-  JWT_EXPIRY: process.env.JWT_EXPIRY
+  JWT_EXPIRY: process.env.JWT_EXPIRY || '1d',
+  MAIL_ID: process.env.MAIL_ID,
+  MAIL_PASSWORD: process.env.MAIL_PASSWORD
 };
 
 export const Config = Object.freeze(_config);

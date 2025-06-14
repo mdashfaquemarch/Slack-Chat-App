@@ -18,7 +18,7 @@ function isAdmin(workspace, userId) {
 
 // check if user is member of workspace
 
-function isUserMemberOfWorkspace(workspace, userId) {
+export function isUserMemberOfWorkspace(workspace, userId) {
     const isValidWorkspaceMember = workspace.members.find((member) => member.memberId.toString() === userId.toString());
     return isValidWorkspaceMember;
 }

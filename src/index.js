@@ -2,6 +2,7 @@ import express from 'express';
 
 import connectDB from './config/database-config.js';
 import { Config } from './config/serverConfig.js';
+
 const app = express();
 
 // common middlewares
