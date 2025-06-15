@@ -12,7 +12,9 @@ const _config = {
   JWT_SECRET: process.env.JWT_SECRET,
   JWT_EXPIRY: process.env.JWT_EXPIRY || '1d',
   MAIL_ID: process.env.MAIL_ID,
-  MAIL_PASSWORD: process.env.MAIL_PASSWORD
+  MAIL_PASSWORD: process.env.MAIL_PASSWORD,
+  REDIS_HOST: process.env.REDIS_HOST || 'localhost',
+  REDIS_PORT: process.env.REDIS_PORT || 6379,
 };
 
 export const Config = Object.freeze(_config);

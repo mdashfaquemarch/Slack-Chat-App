@@ -4,6 +4,9 @@ import AppError from "../utils/errors/app-error.js";
 import { StatusCodes } from "http-status-codes";
 import ChannelRepository from "../repositories/channel-respository.js";
 import UserRepository from "../repositories/user-repository.js";
+import { addEmailToMailQueue } from "../producers/mailQueue-producer.js";
+import { workspaceJoinMail } from "../utils/common/mailObject.js";
+
 
 const workspaceRepo = new WorkspaceRepository();
 const channelRepo = new ChannelRepository();
@@ -172,6 +175,8 @@ async function addMemberToWorkspaceService(workspaceId, memberId, role, userId) 
         }
 
         const response = await workspaceRepo.addMemberToWorkspace(workspaceId, memberId, role);
+
+        addEmailToMailQueue({...workspaceJoinMail(workspace), to: isValidUser.email})
 
         return response;
 
