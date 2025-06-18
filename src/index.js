@@ -5,7 +5,7 @@ import { ExpressAdapter } from '@bull-board/express';
 import connectDB from './config/database-config.js';
 import { Config } from './config/serverConfig.js';
 import mailQueue from './queues/mail-queue.js';
-import testQueue from './queues/test-queue.js'
+
 
 import './processors/mail-processor.js';
 
@@ -21,7 +21,7 @@ const bullServerAdapter = new ExpressAdapter();
 bullServerAdapter.setBasePath('/ui');
 
 createBullBoard({
-  queues: [new BullAdapter(mailQueue), new BullAdapter(testQueue)],
+  queues: [new BullAdapter(mailQueue)],
   serverAdapter:bullServerAdapter
 });
 

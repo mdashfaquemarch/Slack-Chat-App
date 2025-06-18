@@ -6,4 +6,4 @@ export default new Queue('mailQueue', {
     host: Config.REDIS_HOST,
     port: Config.REDIS_PORT
   }
-}, );
+});
