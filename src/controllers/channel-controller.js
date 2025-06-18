@@ -1,12 +1,12 @@
-import { StatusCodes } from "http-status-codes";
-import { getChannelByIdService } from "../services/channel-service.js";
-
-
-
+import { StatusCodes } from 'http-status-codes';
+import { getChannelByIdService } from '../services/channel-service.js';
 
 async function getChannelByIdController(req, res, next) {
   try {
-    const response = await getChannelByIdService(req.params.channelId, req.user);
+    const response = await getChannelByIdService(
+      req.params.channelId,
+      req.user
+    );
 
     return res.status(StatusCodes.OK).json({
       success: true,
@@ -18,6 +18,4 @@ async function getChannelByIdController(req, res, next) {
   }
 }
 
-export {
-    getChannelByIdController
-}
+export { getChannelByIdController };

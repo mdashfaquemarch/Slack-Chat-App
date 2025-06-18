@@ -8,8 +8,8 @@ const channelSchema = new mongoose.Schema(
     },
     workspaceId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Workspace",
-      required: [true, "workspace ID is required"]
+      ref: 'Workspace',
+      required: [true, 'workspace ID is required']
     }
   },
   { timestamps: true }

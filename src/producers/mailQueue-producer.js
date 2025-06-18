@@ -1,10 +1,10 @@
-import mailQueue from "../queues/mail-queue.js"
+import mailQueue from '../queues/mail-queue.js';
 
 export const addEmailToMailQueue = async (emailData) => {
-    try {
-       await mailQueue.add(emailData);
-       console.log("Email added to mail queue")
-    } catch (error) {
-        console.log("Add email to mail queue error", error)
-    }
-}
+  try {
+    await mailQueue.add(emailData);
+    console.log('Email added to mail queue');
+  } catch (error) {
+    console.log('Add email to mail queue error', error);
+  }
+};

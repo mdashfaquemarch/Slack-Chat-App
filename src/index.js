@@ -1,8 +1,12 @@
 import express from 'express';
-
+import { createBullBoard } from '@bull-board/api';
+import { BullAdapter } from '@bull-board/api/bullAdapter.js';
+import { ExpressAdapter } from '@bull-board/express';
 import connectDB from './config/database-config.js';
 import { Config } from './config/serverConfig.js';
-import './processors/mail-processor.js'
+import mailQueue from './queues/mail-queue.js';
+
+import './processors/mail-processor.js';
 
 const app = express();
 
@@ -11,10 +15,20 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// bull board configuration
+const bullServerAdapter = new ExpressAdapter();
+bullServerAdapter.setBasePath('/ui');
+
+createBullBoard({
+  queues: [new BullAdapter(mailQueue)],
+  serverAdapter:bullServerAdapter
+});
+
 // importing routes
 import { errorHandler } from './middlewares/error-middleware.js';
 import apiRoutes from './routes/index.js';
 
+app.use('/ui', bullServerAdapter.getRouter());
 app.use('/api', apiRoutes);
 
 // Global error middleware (at the end)

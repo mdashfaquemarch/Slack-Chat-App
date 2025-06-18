@@ -14,7 +14,7 @@ const _config = {
   MAIL_ID: process.env.MAIL_ID,
   MAIL_PASSWORD: process.env.MAIL_PASSWORD,
   REDIS_HOST: process.env.REDIS_HOST || 'localhost',
-  REDIS_PORT: process.env.REDIS_PORT || 6379,
+  REDIS_PORT: process.env.REDIS_PORT || 6379
 };
 
 export const Config = Object.freeze(_config);

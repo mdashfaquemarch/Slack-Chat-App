@@ -33,7 +33,7 @@ class CrudRepository {
       _id: {
         $in: modelIds
       }
-    })
+    });
     return response;
   }
 }

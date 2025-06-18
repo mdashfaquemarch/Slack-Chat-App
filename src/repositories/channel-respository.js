@@ -7,9 +7,8 @@ class ChannelRepository extends CrudRepository {
   }
 
   async getChannelWithWorkspaceDetails(channelId) {
-      const channel = await Channel.findById(channelId)
-      .populate("workspaceId");
-      return channel;
+    const channel = await Channel.findById(channelId).populate('workspaceId');
+    return channel;
   }
 }
 
