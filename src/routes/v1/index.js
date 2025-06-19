@@ -5,6 +5,7 @@ import userRoutes from './user-route.js';
 import workspaceRoutes from './workspace-route.js';
 import channelRoutes from './channel-route.js';
 import memberRoutes from './member-route.js'
+import messageRoutes from './message-route.js'
 
 const router = express.Router();
 
@@ -13,5 +14,6 @@ router.use('/users', userRoutes);
 router.use('/workspaces', workspaceRoutes);
 router.use('/channels', channelRoutes);
 router.use("/members", memberRoutes);
+router.use("/messages", messageRoutes);
 
 export default router;
