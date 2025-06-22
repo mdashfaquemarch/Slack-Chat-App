@@ -2,8 +2,10 @@ import { StatusCodes } from 'http-status-codes';
 import ChannelRepository from '../repositories/channel-respository.js';
 import AppError from '../utils/errors/app-error.js';
 import { isUserMemberOfWorkspace } from './workspace-service.js';
+import MessageRepository from '../repositories/message-repository.js';
 
 const channelRepo = new ChannelRepository();
+const messageRepo = new MessageRepository();
 
 async function getChannelByIdService(channelId, userId) {
   try {
@@ -26,7 +28,22 @@ async function getChannelByIdService(channelId, userId) {
       );
     }
 
-    return channel;
+    const messages = await messageRepo.getPaginatedMessaged(
+      {
+        channelId
+      },
+      1,
+      20
+    );
+
+    return {
+      _id: channel._id,
+      name: channel.name,
+      createdAt: channel.createdAt,
+      updatedAt: channel.updatedAt,
+      workspaceId: channel.workspaceId,
+      messages
+    };
   } catch (error) {
     throw error;
   }

@@ -32,6 +32,13 @@ async function getMessagesService(messageParams, page, limit, userId) {
   }
 }
 
+
+async function createMessageService(message) {
+  const newMessage = await messageRepo.create(message);
+  return newMessage;
+}
+
 export {
-    getMessagesService
+    getMessagesService,
+    createMessageService
 }
