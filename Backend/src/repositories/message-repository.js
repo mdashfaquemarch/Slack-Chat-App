@@ -1,5 +1,5 @@
-import CrudRepository from "./crud-repository.js";
 import Message from '../models/message-model.js'
+import CrudRepository from "./crud-repository.js";
 
 class MessageRepository extends CrudRepository {
    constructor() {

@@ -1,4 +1,5 @@
 import { StatusCodes } from 'http-status-codes';
+
 import { getChannelByIdService } from '../services/channel-service.js';
 
 async function getChannelByIdController(req, res, next) {

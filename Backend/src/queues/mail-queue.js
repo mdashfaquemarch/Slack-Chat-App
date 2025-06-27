@@ -1,4 +1,5 @@
 import Queue from 'bull'
+
 import { Config } from '../config/serverConfig.js';
 
 export default new Queue('mailQueue', {

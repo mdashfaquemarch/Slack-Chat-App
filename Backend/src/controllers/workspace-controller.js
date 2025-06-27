@@ -1,4 +1,5 @@
 import { StatusCodes } from 'http-status-codes';
+
 import {
   addChannelToWorkspaceService,
   addMemberToWorkspaceService,
@@ -150,12 +151,11 @@ async function addChannelToWorkspaceController(req, res, next) {
 }
 
 export {
-  createWorkspaceController,
-  getWorkspacesUserIsMemberOfController,
-  deleteWorkspaceController,
-  getWorkspaceController,
-  getWorkspaceByJoinCodeController,
-  updateWorkspaceController,
+  addChannelToWorkspaceController,
   addMemberToWorkspaceController,
-  addChannelToWorkspaceController
-};
+  createWorkspaceController,
+  deleteWorkspaceController,
+  getWorkspaceByJoinCodeController,
+  getWorkspaceController,
+  getWorkspacesUserIsMemberOfController,
+  updateWorkspaceController};

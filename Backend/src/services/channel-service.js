@@ -1,8 +1,9 @@
 import { StatusCodes } from 'http-status-codes';
+
 import ChannelRepository from '../repositories/channel-respository.js';
+import MessageRepository from '../repositories/message-repository.js';
 import AppError from '../utils/errors/app-error.js';
 import { isUserMemberOfWorkspace } from './workspace-service.js';
-import MessageRepository from '../repositories/message-repository.js';
 
 const channelRepo = new ChannelRepository();
 const messageRepo = new MessageRepository();

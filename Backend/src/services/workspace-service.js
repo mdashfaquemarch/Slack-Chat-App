@@ -1,11 +1,12 @@
-import WorkspaceRepository from '../repositories/workspace-respository.js';
-import { v4 as uuidv4 } from 'uuid';
-import AppError from '../utils/errors/app-error.js';
 import { StatusCodes } from 'http-status-codes';
+import { v4 as uuidv4 } from 'uuid';
+
+import { addEmailToMailQueue } from '../producers/mailQueue-producer.js';
 import ChannelRepository from '../repositories/channel-respository.js';
 import UserRepository from '../repositories/user-repository.js';
-import { addEmailToMailQueue } from '../producers/mailQueue-producer.js';
+import WorkspaceRepository from '../repositories/workspace-respository.js';
 import { workspaceJoinMail } from '../utils/common/mailObject.js';
+import AppError from '../utils/errors/app-error.js';
 
 const workspaceRepo = new WorkspaceRepository();
 const channelRepo = new ChannelRepository();
@@ -266,12 +267,11 @@ async function addChannelToWorkspaceService(workspaceId, channelName, userId) {
 }
 
 export {
-  createWorkspaceService,
-  getWorkspacesUserIsMemberOfService,
-  deleteWorkspaceService,
-  getWorkspaceService,
-  getWorkspaceByJoinCodeService,
-  updateWorkspaceService,
+  addChannelToWorkspaceService,
   addMemberToWorkspaceService,
-  addChannelToWorkspaceService
-};
+  createWorkspaceService,
+  deleteWorkspaceService,
+  getWorkspaceByJoinCodeService,
+  getWorkspaceService,
+  getWorkspacesUserIsMemberOfService,
+  updateWorkspaceService};

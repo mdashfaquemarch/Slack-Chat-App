@@ -1,15 +1,15 @@
-import express from 'express';
-import { Server } from 'socket.io';
-import { createServer } from 'http';
+import './processors/mail-processor.js';
+
 import { createBullBoard } from '@bull-board/api';
 import { BullAdapter } from '@bull-board/api/bullAdapter.js';
 import { ExpressAdapter } from '@bull-board/express';
+import express from 'express';
+import { createServer } from 'http';
+import { Server } from 'socket.io';
+
 import connectDB from './config/database-config.js';
 import { Config } from './config/serverConfig.js';
 import mailQueue from './queues/mail-queue.js';
-
-
-import './processors/mail-processor.js';
 
 const app = express();
 const server = createServer(app);
@@ -30,10 +30,10 @@ createBullBoard({
 });
 
 // importing routes
+import channelSocketHandler from './controllers/channelSocket-controller.js'
+import messageSocketHandler from './controllers/messageSocket-controller.js';
 import { errorHandler } from './middlewares/error-middleware.js';
 import apiRoutes from './routes/index.js';
-import messageSocketHandler from './controllers/messageSocket-controller.js';
-import channelSocketHandler from './controllers/channelSocket-controller.js'
 
 
 app.use('/ui', bullServerAdapter.getRouter());

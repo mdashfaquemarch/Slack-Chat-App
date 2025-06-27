@@ -13,7 +13,6 @@ const addChannelToWorkspaceSchema = z.object({
 });
 
 export {
-  workspaceSchema,
+  addChannelToWorkspaceSchema,
   addMemberToWorkspaceSchema,
-  addChannelToWorkspaceSchema
-};
+  workspaceSchema};

@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer';
+
 import { Config } from './serverConfig.js';
 
 export default nodemailer.createTransport({

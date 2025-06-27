@@ -1,4 +1,5 @@
 import express from 'express';
+
 import {
   addChannelToWorkspaceController,
   addMemberToWorkspaceController,
@@ -9,13 +10,13 @@ import {
   getWorkspacesUserIsMemberOfController,
   updateWorkspaceController
 } from '../../controllers/workspace-controller.js';
-import { validate } from '../../validators/zodValidator.js';
+import { isAuthenticated } from '../../middlewares/auth-middleware.js';
 import {
   addChannelToWorkspaceSchema,
   addMemberToWorkspaceSchema,
   workspaceSchema
 } from '../../validators/workspaceSchema.js';
-import { isAuthenticated } from '../../middlewares/auth-middleware.js';
+import { validate } from '../../validators/zodValidator.js';
 
 const router = express.Router();
 

@@ -1,9 +1,10 @@
-import Workspace from '../models/workspace-model.js';
-import CrudRepository from './crud-repository.js';
-import AppError from './../utils/errors/app-error.js';
 import { StatusCodes } from 'http-status-codes';
+
 import User from '../models/user-model.js';
+import Workspace from '../models/workspace-model.js';
+import AppError from './../utils/errors/app-error.js';
 import ChannelRepository from './channel-respository.js';
+import CrudRepository from './crud-repository.js';
 
 const channelRepo = new ChannelRepository();
 

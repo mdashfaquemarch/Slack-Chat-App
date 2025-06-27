@@ -1,4 +1,5 @@
 import { StatusCodes } from "http-status-codes";
+
 import ChannelRepository from "../repositories/channel-respository.js";
 import MessageRepository from "../repositories/message-repository.js";
 import AppError from "../utils/errors/app-error.js";
@@ -39,6 +40,5 @@ async function createMessageService(message) {
 }
 
 export {
-    getMessagesService,
-    createMessageService
-}
+    createMessageService,
+    getMessagesService}
