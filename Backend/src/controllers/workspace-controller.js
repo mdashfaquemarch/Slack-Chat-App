@@ -8,6 +8,8 @@ import {
   getWorkspaceByJoinCodeService,
   getWorkspaceService,
   getWorkspacesUserIsMemberOfService,
+  joinWorkspaceService,
+  resetWorkspaceJoinCodeService,
   updateWorkspaceService
 } from '../services/workspace-service.js';
 
@@ -150,6 +152,38 @@ async function addChannelToWorkspaceController(req, res, next) {
   }
 }
 
+async function resetJoinCodeJoinController(req, res, next) {
+   try {
+     const response = await resetWorkspaceJoinCodeService(req.params.workspaceId, req.user);
+
+     res.status(StatusCodes.OK).json({
+      success: true,
+      message: 'join code reset successfully',
+      data: response,
+      error: {}
+    });
+
+   } catch (error) {
+      next(error);
+   }
+}
+
+async function joinWorkspaceController(req, res, next) {
+   try {
+     const response = await joinWorkspaceService(req.params.workspaceId, req.body.joinCode,  req.user);
+
+     res.status(StatusCodes.OK).json({
+      success: true,
+      message: 'user Joined successfully to workspace successfully',
+      data: response,
+      error: {}
+    });
+
+   } catch (error) {
+      next(error);
+   }
+}
+
 export {
   addChannelToWorkspaceController,
   addMemberToWorkspaceController,
@@ -158,4 +192,7 @@ export {
   getWorkspaceByJoinCodeController,
   getWorkspaceController,
   getWorkspacesUserIsMemberOfController,
-  updateWorkspaceController};
+  updateWorkspaceController,
+  resetJoinCodeJoinController,
+  joinWorkspaceController
+};

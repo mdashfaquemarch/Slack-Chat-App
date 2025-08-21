@@ -35,6 +35,7 @@ async function signInService(data) {
     const token = createJWT({ id: user._id, email: user.email });
 
     const loggedInUser = {
+      _id: user._id,
       username: user.username,
       avatar: user.avatar,
       email: user.email,

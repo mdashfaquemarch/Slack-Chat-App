@@ -28,7 +28,7 @@ function isAdmin(workspace, userId) {
 
 export function isUserMemberOfWorkspace(workspace, userId) {
   const isValidWorkspaceMember = workspace.members.find(
-    (member) => member.memberId.toString() === userId.toString()
+    (member) => member.memberId._id.toString() === userId.toString()
   );
   return isValidWorkspaceMember;
 }
@@ -102,7 +102,7 @@ async function deleteWorkspaceService(workspaceId, userId) {
 
 async function getWorkspaceService(workspaceId, userId) {
   try {
-    const workspace = await workspaceRepo.getById(workspaceId);
+    const workspace = await workspaceRepo.getWorkspaceDetailsById(workspaceId);
 
     if (!workspace) {
       throw new AppError('workspace not found', StatusCodes.NOT_FOUND);
@@ -173,6 +173,7 @@ async function updateWorkspaceService(workspaceId, workspaceData, userId) {
   }
 }
 
+// for admin 
 async function addMemberToWorkspaceService(
   workspaceId,
   memberId,
@@ -266,6 +267,48 @@ async function addChannelToWorkspaceService(workspaceId, channelName, userId) {
   }
 }
 
+
+async function resetWorkspaceJoinCodeService(workspaceId, userId) {
+  try {
+    let newJoinCode = uuidv4().substring(0, 6);
+
+    const updatedWorkspace = await updateWorkspaceService(workspaceId, {
+      joinCode: newJoinCode,
+    }, userId);
+    return updatedWorkspace;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function joinWorkspaceService(workspaceId, joinCode, userId) {
+  try {
+    const workspace = await workspaceRepo.getById(workspaceId);
+
+    if (!workspace) {
+      throw new AppError('workspace not found', StatusCodes.NOT_FOUND);
+    }
+
+
+    if (workspace.joinCode !== joinCode) {
+      throw new AppError("Invalid joinCode", StatusCodes.BAD_REQUEST)
+    }
+
+
+    const userJoinedWorkspace =  await workspaceRepo.addMemberToWorkspace(
+      workspaceId,
+      userId,
+      "member"
+    );
+
+
+    return  userJoinedWorkspace;
+
+  } catch (error) {
+    throw error;
+  }
+}
+
 export {
   addChannelToWorkspaceService,
   addMemberToWorkspaceService,
@@ -274,4 +317,7 @@ export {
   getWorkspaceByJoinCodeService,
   getWorkspaceService,
   getWorkspacesUserIsMemberOfService,
-  updateWorkspaceService};
+  updateWorkspaceService,
+  resetWorkspaceJoinCodeService,
+  joinWorkspaceService
+};

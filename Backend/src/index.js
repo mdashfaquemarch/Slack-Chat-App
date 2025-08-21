@@ -3,8 +3,8 @@ import './processors/mail-processor.js';
 import { createBullBoard } from '@bull-board/api';
 import { BullAdapter } from '@bull-board/api/bullAdapter.js';
 import { ExpressAdapter } from '@bull-board/express';
-import express from 'express';
 import cors from 'cors'
+import express from 'express';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
 
@@ -14,7 +14,11 @@ import mailQueue from './queues/mail-queue.js';
 
 const app = express();
 const server = createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+  cors: {
+    origin: "*"
+  }
+});
 
 const corsOptions = {
   origin: process.env.FRONTEND_URL, // or ['https://site1.com', 'https://site2.com']
